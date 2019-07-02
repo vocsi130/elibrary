@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main_layout}">
+
+
+
+<head>
+ 
+<link rel="stylesheet"    href="../../static/css/booklist.css" th:href="@{/css/booklist.css}" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="icon" href="favicon.ico">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}"/>
+ <link rel="stylesheet" href="../../static/css/style.css" th:href="@{css/style.css}" /> 
+
+</head>
+
+<body>
+
+	<th:block layout:fragment="header">
+	</th:block>
+	
+	<!--  <th:block layout:fragment="content"> -->
+	 <th:block layout:fragment="content" class="container mySpace">
+ 
+	  <h3>List of Books Currently in your Catalogue</h3>
+        <hr/>
+ 		<a href="/book">Add a new Book</a>
+		<a href="/" id="linkBackHome" >Back to home</a><br/><br/>
+		<table class="table table-striped">
+			<thead>
+				<th>Title</th>
+				<th>Free</th>
+				<th>Date Published</th>
+				  <th>Actions</th>
+			</thead>
+			<tbody>
+				<tr th:each="book : ${books}">
+					<td th:text="${book.title}"></td>
+					<td th:text="${book.free}"></td>
+					<td th:text="${book.datepublished}"></td>
+				  	<td>
+						<a	th:href="@{'/book/delete/' + ${book.idBook}}"
+									th:attr="data-id=${book.idBook}, data-name=${book.title}">
+										<i class="fa fa-trash" style="font-size: 21px; color: red;"></i>
+								</a>
+						</td>
+				</tr>
+			</tbody>
+		</table>
+	</th:block>
+	
+	<th:block layout:fragment="footer">
+	</th:block>
+	
+
+</body>
+</html>
